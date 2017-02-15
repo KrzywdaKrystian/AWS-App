@@ -1,5 +1,3 @@
-git remote add origin https://github.com/KrzywdaKrystian/AWS-App.git#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */

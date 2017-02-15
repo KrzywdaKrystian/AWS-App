@@ -1,8 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body { padding: 50px; font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a { color: #00B7FF; text-decoration: none; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+ul.photos li { display: inline-block; vertical-align: middle; }
+ul.photos li a { display: block; margin: 5px; border-radius: 6px; padding: 10px 14px; font-size: 16px;  }
+ul.photos li a.current {  color: #fff; background: #00B7FF;  }
+
+.file-container { overflow: hidden;  position: relative; display: inline-block; background-color: rgba(0, 0, 0, .2);
+  height: 40px; vertical-align: middle; padding: 0px 10px; line-height: 40px; cursor: pointer;
 }
 
-a {
-  color: #00B7FF;
+
+button { background-color: #009dd6; border: none; color: white; padding: 12px 24px; text-align: center; text-decoration: none;
+  display: inline-block; font-size: 14px; vertical-align: middle; cursor: pointer; transition: all .3s;
 }
+button:hover { background-color: #008bbe; }

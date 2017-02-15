@@ -1,5 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(ng-controller="MainController as main")
+    h1= title
+    include menu.jade
+    p= desc
+    div(class="file-container")
+      input(type="file")
+    button(type="button") add photo
