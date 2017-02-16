@@ -1,10 +1,17 @@
 extends layout
 
 block content
-  div(ng-controller="MainController as main")
+  div(ng-controller="MainController")
     h1= title
     include menu.jade
     p= desc
+    div(id="app")
     div(class="file-container")
-      input(type="file")
-    button(type="button") add photo
+      input(type="file", accept="image/*", file)
+      button(type="button", ng-click="upload()") add photo
+    div(class="progress", ng-show="uploadProgress > 0")
+        div(class="progress-bar", ng-class="{'progress-bar-success' : uploadStatus == 1}" role="progressbar", aria-valuenow="{{ uploadProgress }}", aria-valuemin="0",
+          aria-valuemax="100", style="width: {{ uploadProgress }}%;", ng-bind="uploadMsg")
+    div(class="alert alert-danger", ng-bind="uploadMsg", ng-show="uploadStatus == 2")
+
+

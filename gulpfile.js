@@ -15,6 +15,7 @@ gulp.task('watch-js', watchJs);
 function buildJs() {
     return gulp.src([
         'node_modules/angular/angular.min.js',
+        'node_modules/aws-sdk/dist/aws-sdk.min.js',
         'assets/js/*/*.js',
         'assets/js/*.js'
     ])

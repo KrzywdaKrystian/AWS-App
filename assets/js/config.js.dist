@@ -1,0 +1,9 @@
+var CONFIG_CREDS = {
+    access_key: '',
+    secret_key: '',
+    bucket: ''
+};
+
+var CONFIG_REGION = 'us-west-2';
+
+var CONFIG_MAX_FILE_SIZE = 10585760; // 10MB in Bytes;
