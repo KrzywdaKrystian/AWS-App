@@ -7,6 +7,14 @@ ul.photos li { display: inline-block; vertical-align: middle; }
 ul.photos li a { display: block; margin: 5px; border-radius: 6px; padding: 10px 14px; font-size: 16px;  }
 ul.photos li a.current {  color: #fff; background: #00B7FF;  }
 
+ul.gallery { border: 1px solid #9f9fab; border-radius: 10px;}
+ul.gallery li { padding: 10px; }
+ul.gallery li .photo-container { width: 120px; height: 120px; position: relative; }
+ul.gallery li .loading { width: 120px; height: 120px; position: absolute; left: 0; top: 0; text-align: center; z-index: 1; }
+ul.gallery li .photo { width: 120px; height: 120px; background-position: center; background-repeat: no-repeat;
+  background-size: cover; position: relative; z-index: 2;
+}
+
 .file-container { overflow: hidden;  position: relative; display: inline-block; background-color: rgba(0, 0, 0, .2);
   height: 40px; vertical-align: middle; padding: 0 0 0 10px; line-height: 40px; cursor: pointer; margin-bottom: 10px;
 }

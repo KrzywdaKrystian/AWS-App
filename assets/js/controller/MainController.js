@@ -11,9 +11,6 @@ function MainController($scope) {
         $scope.uploadStatus = 0;
         $scope.uploadMsg = '';
 
-        AWS.config.update({accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key});
-        AWS.config.region = CONFIG_REGION;
-
         var bucket = new AWS.S3({params: {Bucket: $scope.creds.bucket}});
 
         if ($scope.file) {
