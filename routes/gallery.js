@@ -3,10 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('photos', {
-    title: 'Photos',
+  res.render('gallery', {
+    title: 'Gallery',
     desc: 'Uploaded photos',
-    viewName: 'photos'
+    viewName: 'gallery'
   });
 });
 
