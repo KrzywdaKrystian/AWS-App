@@ -23,7 +23,7 @@ In ./workers you can find a example of worker which rotate image
 
 Open app in browser: http://localhost:8080
 
-Helpful links:
+**Helpful links:**
 - https://expressjs.com/en/starter/hello-world.html
 - https://github.com/aws/aws-sdk-js
 - http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
