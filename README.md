@@ -15,6 +15,7 @@ The application allows you to add, delete, and view the list of photos.
 In ./workers you can find a example of worker which rotate image
 
 **Getting Started:**
+
 1. Create config.js in ./assets/js/ (example ./assets/js/config.js.dist)
 2. Create config.json in  /.worker/rotate_image/ (example worker/rotate_image/config.json.dist)
 3. run command: node app.js 
