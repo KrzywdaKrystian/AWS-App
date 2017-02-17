@@ -467,23 +467,21 @@ function GalleryController($scope) {
 
     function rotatePhoto(index) {
 
-        var msg = "test";
+        var photo = $scope.gallery[index];
 
         var params = {
             DelaySeconds: 0,
-            MessageAttributes: {
-                "City": {
-                    DataType: "String",
-                    StringValue: "Any City"
-                }
-            },
-            MessageBody: "Rotate photo",
+            MessageBody: JSON.stringify({
+                title: 'Rotate photo',
+                type: 'rotate-photo',
+                photoKey: photo.key
+            }),
             QueueUrl: QUEUE_URL
         };
 
         sqs.sendMessage(params, function (err, data) {
             if (err) {
-                console.log(err);
+                alert(err);
             }
             else {
                 console.log(data);
