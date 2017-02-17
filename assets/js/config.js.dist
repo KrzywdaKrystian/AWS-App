@@ -7,3 +7,5 @@ var CONFIG_CREDS = {
 var CONFIG_REGION = 'us-west-2';
 
 var CONFIG_MAX_FILE_SIZE = 10585760; // 10MB in Bytes;
+
+var QUEUE_URL = '';

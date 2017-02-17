@@ -14,4 +14,4 @@ block content
             img(src="/images/gears.gif")
           img(ng-src="{{ photo.src }}", class="photo")
           button(ng-click="deletePhoto($index)") Delete Image
-          button(class="grey") Rotate Image
+          button(ng-click="rotatePhoto($index)" class="grey") Rotate Image

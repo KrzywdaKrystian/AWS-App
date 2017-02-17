@@ -1,0 +1,16 @@
+{
+  "name": "rotate_image",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fq": "^0.4.1",
+    "sqs-consumer": "^3.4.0",
+    "aws-sdk": "^2.14.0"
+  }
+}

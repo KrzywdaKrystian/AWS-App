@@ -381,10 +381,13 @@ function GalleryController($scope) {
         Bucket: creds.bucket
     };
 
+    var sqs = new AWS.SQS();
+
     $scope.gallery = [];
     $scope.inProgress = false;
 
     $scope.deletePhoto = deletePhoto;
+    $scope.rotatePhoto = rotatePhoto;
 
     // listObjects
     (function () {
@@ -445,7 +448,7 @@ function GalleryController($scope) {
 
         var object = {
             Bucket: creds.bucket,
-            Key : photo.key
+            Key: photo.key
         };
 
         bucket.deleteObject(object, function (err, data) {
@@ -460,6 +463,33 @@ function GalleryController($scope) {
                 });
             }
         });
+    }
+
+    function rotatePhoto(index) {
+
+        var msg = "test";
+
+        var params = {
+            DelaySeconds: 0,
+            MessageAttributes: {
+                "City": {
+                    DataType: "String",
+                    StringValue: "Any City"
+                }
+            },
+            MessageBody: "Rotate photo",
+            QueueUrl: QUEUE_URL
+        };
+
+        sqs.sendMessage(params, function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(data);
+            }
+        });
+
     }
 
 }
@@ -560,6 +590,7 @@ var CONFIG_REGION = 'us-west-2';
 
 var CONFIG_MAX_FILE_SIZE = 10585760; // 10MB in Bytes;
 
+var QUEUE_URL = 'https://sqs.us-west-2.amazonaws.com/983680736795/KrzywdaSQS';
 var app = angular.module('app', []);
 
 app.run(function () {

@@ -6,10 +6,13 @@ function GalleryController($scope) {
         Bucket: creds.bucket
     };
 
+    var sqs = new AWS.SQS();
+
     $scope.gallery = [];
     $scope.inProgress = false;
 
     $scope.deletePhoto = deletePhoto;
+    $scope.rotatePhoto = rotatePhoto;
 
     // listObjects
     (function () {
@@ -70,7 +73,7 @@ function GalleryController($scope) {
 
         var object = {
             Bucket: creds.bucket,
-            Key : photo.key
+            Key: photo.key
         };
 
         bucket.deleteObject(object, function (err, data) {
@@ -85,6 +88,33 @@ function GalleryController($scope) {
                 });
             }
         });
+    }
+
+    function rotatePhoto(index) {
+
+        var msg = "test";
+
+        var params = {
+            DelaySeconds: 0,
+            MessageAttributes: {
+                "City": {
+                    DataType: "String",
+                    StringValue: "Any City"
+                }
+            },
+            MessageBody: "Rotate photo",
+            QueueUrl: QUEUE_URL
+        };
+
+        sqs.sendMessage(params, function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(data);
+            }
+        });
+
     }
 
 }
