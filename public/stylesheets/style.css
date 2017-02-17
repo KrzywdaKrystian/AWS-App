@@ -7,13 +7,15 @@ ul.photos li { display: inline-block; vertical-align: middle; }
 ul.photos li a { display: block; margin: 5px; border-radius: 6px; padding: 10px 14px; font-size: 16px;  }
 ul.photos li a.current {  color: #fff; background: #00B7FF;  }
 
-ul.gallery { border: 1px solid #9f9fab; border-radius: 10px;}
-ul.gallery li { padding: 10px; }
-ul.gallery li .photo-container { width: 120px; height: 120px; position: relative; }
+ul.gallery { border: 1px solid #9f9fab; border-radius: 10px; display: inline-block; }
+ul.gallery li { padding: 10px; border-bottom: 1px solid #9f9fab; }
+ul.gallery li:last-child { border-bottom: 0; }
+ul.gallery li .photo-container {  height: 120px; position: relative; }
 ul.gallery li .loading { width: 120px; height: 120px; position: absolute; left: 0; top: 0; text-align: center; z-index: 1; }
 ul.gallery li .photo { width: 120px; height: 120px; background-position: center; background-repeat: no-repeat;
-  background-size: cover; position: relative; z-index: 2;
+  background-size: cover; position: relative; z-index: 2; display: inline-block; vertical-align: middle;
 }
+ul.gallery li button { display: inline-block; vertical-align: middle; margin: 10px; font-weight: 600; }
 
 .file-container { overflow: hidden;  position: relative; display: inline-block; background-color: rgba(0, 0, 0, .2);
   height: 40px; vertical-align: middle; padding: 0 0 0 10px; line-height: 40px; cursor: pointer; margin-bottom: 10px;
@@ -23,6 +25,9 @@ button { background-color: #009dd6; border: none; color: white; padding: 12px 24
   display: inline-block; font-size: 14px; vertical-align: middle; cursor: pointer; transition: all .3s;
 }
 button:hover { background-color: #008bbe; }
+
+button.grey { background-color: #9f9fab; }
+button.grey:hover { background-color: #9393a0; }
 
 
 @-webkit-keyframes progress-bar-stripes {

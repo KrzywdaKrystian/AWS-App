@@ -12,4 +12,6 @@ block content
         div(class="photo-container")
           div(class="loading")
             img(src="/images/gears.gif")
-          img(ng-src="{{ photo }}", class="photo")
+          img(ng-src="{{ photo.src }}", class="photo")
+          button(ng-click="deletePhoto($index)") Delete Image
+          button(class="grey") Rotate Image
