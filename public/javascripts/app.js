@@ -400,30 +400,13 @@ function GalleryController($scope) {
             }
             // successful response
             else {
+                var key = '';
                 setTimeout(function () {
                     $scope.$apply(function () {
-                        console.log(data.Contents);
                         for (var i = 0; i < data.Contents.length; i++) {
-
                             if (data.Contents[i]['Size'] > 0) {
-                                var key = data.Contents[i]['Key'];
-                                bucket.getObject({
-                                    Bucket: creds.bucket,
-                                    Key: key
-                                }, function (err, file) {
-                                    if (!err) {
-                                        setTimeout(function () {
-                                            $scope.$apply(function () {
-                                                $scope.gallery.push({
-                                                    'key': key,
-                                                    'src': 'data:image/jpeg;base64,' + encode(file.Body)
-                                                });
-                                            });
-                                        });
-                                    } else {
-                                        console.error(err);
-                                    }
-                                });
+                                key = data.Contents[i]['Key'];
+                                getObject(key);
                             }
                         }
                         $scope.inProgress = false;
@@ -434,6 +417,26 @@ function GalleryController($scope) {
 
     }());
 
+    function getObject(key) {
+        bucket.getObject({
+            Bucket: creds.bucket,
+            Key: key
+        }, function (err, file) {
+            if (!err) {
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.gallery.push({
+                            'key': key,
+                            'src': 'data:image/jpeg;base64,' + encode(file.Body)
+                        });
+                    });
+                });
+            } else {
+                console.error(err);
+            }
+        });
+    }
+
     function encode(data) {
         var str = data.reduce(function (a, b) {
             return a + String.fromCharCode(b)
@@ -442,7 +445,6 @@ function GalleryController($scope) {
     }
 
     function deletePhoto(index) {
-        console.log(index);
 
         var photo = $scope.gallery[index];
 
@@ -507,6 +509,7 @@ function MainController($scope) {
         var bucket = new AWS.S3({params: {Bucket: $scope.creds.bucket}});
 
         if ($scope.file) {
+            console.log($scope.file);
             // Perform File Size Check First
             var fileSize = Math.round(parseInt($scope.file.size));
             if (fileSize > $scope.sizeLimit) {

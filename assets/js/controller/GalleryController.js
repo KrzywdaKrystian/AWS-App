@@ -28,7 +28,6 @@ function GalleryController($scope) {
                 var key = '';
                 setTimeout(function () {
                     $scope.$apply(function () {
-                        console.log(data.Contents);
                         for (var i = 0; i < data.Contents.length; i++) {
                             if (data.Contents[i]['Size'] > 0) {
                                 key = data.Contents[i]['Key'];

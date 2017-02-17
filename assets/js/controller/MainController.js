@@ -14,6 +14,7 @@ function MainController($scope) {
         var bucket = new AWS.S3({params: {Bucket: $scope.creds.bucket}});
 
         if ($scope.file) {
+            console.log($scope.file);
             // Perform File Size Check First
             var fileSize = Math.round(parseInt($scope.file.size));
             if (fileSize > $scope.sizeLimit) {
