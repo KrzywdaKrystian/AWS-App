@@ -2,6 +2,7 @@ var fs = require('fs');
 var Consumer = require('sqs-consumer');
 var AWS = require('aws-sdk');
 var Jimp = require("jimp");
+var ddb = require('dynamodb');
 
 var APP_CONFIG_FILE = "./config.json";
 var helper = {
@@ -12,6 +13,10 @@ AWS.config.update({
     accessKeyId: config.access_key,
     secretAccessKey: config.secret_key,
     region: config.region
+});
+ddb.ddb({
+    accessKeyId: config.access_key,
+    secretAccessKey: config.secret_key,
 });
 
 console.log('start Rotate Image worker');
@@ -34,12 +39,12 @@ var app = Consumer.create({
                 }, function (err, file) {
                     if (!err) {
 
-                        var photoPath = 'rotated/'+ msgBody.photoKey;
-                        var transformedPhotoPath = 'rotated/transformed/'+ msgBody.photoKey;
+                        var photoPath = 'rotated/' + msgBody.photoKey;
+                        var transformedPhotoPath = 'rotated/transformed/' + msgBody.photoKey;
 
                         // save to rotated folder
-                        fs.writeFile(photoPath, file.Body, function(err) {
-                            if(err) console.log('>>>>>>>>>>>>', err);
+                        fs.writeFile(photoPath, file.Body, function (err) {
+                            if (err) console.log('>>>>>>>>>>>>', err);
                         });
 
                         // read file from rotated folder
@@ -49,7 +54,7 @@ var app = Consumer.create({
                                 .write(transformedPhotoPath);
 
                             // read transformed photo
-                            fs.readFile(transformedPhotoPath, 'utf8', function (err,data) {
+                            fs.readFile(transformedPhotoPath, 'utf8', function (err, data) {
                                 if (err) {
                                     return console.log(err);
                                 }
@@ -57,10 +62,10 @@ var app = Consumer.create({
 
                                 // put to aws
                                 var mime = image._originalMime;
-                                image.getBuffer( mime, function (err, buffer) {
+                                image.getBuffer(mime, function (err, buffer) {
 
                                     var params = {
-                                        Key: 'transformed_'+msgBody.photoKey,
+                                        Key: 'transformed_' + msgBody.photoKey,
                                         ContentType: mime,
                                         ContentEncoding: 'base64',
                                         Body: buffer
@@ -75,6 +80,21 @@ var app = Consumer.create({
                                             // Upload Successfully Finished
                                             console.log(data);
                                             console.log('>>>>>>> File Uploaded Successfully', 'Done');
+                                            // flat [string, number, string array or number array] based json object
+                                            var item = {
+                                                date: (new Date).getTime(),
+                                                key: 'transformed_' + msgBody.photoKey,
+                                                type: 'rotate-photo'
+                                            };
+                                            /*ddb.putItem('a-table', item, {}, function (err, res, cap) {
+                                                if(err) {
+                                                    console.log('ddb', err);
+                                                }
+                                                else {
+                                                    console.log('res', res);
+                                                    console.log('cap', cap);
+                                                }
+                                            });*/
                                         }
                                     });
 

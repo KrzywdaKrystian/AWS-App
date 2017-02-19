@@ -10,8 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "aws-sdk": "^2.14.0",
+    "dynamodb": "^0.3.6",
     "fq": "^0.4.1",
-    "sqs-consumer": "^3.4.0",
-    "jimp": "^0.2.27"
+    "jimp": "^0.2.27",
+    "sqs-consumer": "^3.4.0"
   }
 }

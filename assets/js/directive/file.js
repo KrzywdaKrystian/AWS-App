@@ -5,7 +5,6 @@ function fileDirective() {
             file: '@'
         },
         link: function(scope, el, attrs){
-            console.log('file init');
             el.bind('change', function(event){
                 var files = event.target.files;
                 var file = files[0];
